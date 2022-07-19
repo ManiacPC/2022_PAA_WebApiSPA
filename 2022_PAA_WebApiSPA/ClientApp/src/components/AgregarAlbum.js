@@ -12,8 +12,44 @@ const AgregarAlbum = () => {
     // Estados para uso en lógica
     const [alertaValidacion, setAlertaValidacion] = useState(false)
 
-    const handleAgregarAlbum = (evento) => {
-        // ... ToDo
+    // Método para enviar solicitud POST al backend con los datos
+    const registrarAlbum = async (datos) => {
+        await fetch('/albumes/nuevo', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos) // conversión a datos
+        })
+            .then(response => {
+                // response.json() // aquí se obtiene la respuesta
+                alert("Álbum ingresado correctamente")
+            })
+            .catch(error => {
+                console.log("error")
+                alert("Ocurrió un error, por favor revise los datos")
+            })
+    }
+
+    /*
+     * Función para manejar evento click al agregar álbum
+    */ 
+    const handleAgregarAlbum = async(evento) => {
+        setAlertaValidacion(false)
+
+        if (titulo === "" || productora === "") {
+            setAlertaValidacion(true)
+        } else {
+            // crear objeto json para enviar datos
+            const datos = {
+                titulo      : titulo, // puede acotarse como titulo,
+                lanzamiento : fechaLanzamiento,
+                productora  : productora,
+                topSeller   : topSeller
+            }
+
+            await registrarAlbum(datos) // se espera la respuesta
+        }
     }
 
     // Salida JSX

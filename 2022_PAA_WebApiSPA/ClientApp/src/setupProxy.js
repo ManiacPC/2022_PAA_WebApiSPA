@@ -4,8 +4,11 @@ const { env } = require('process');
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
   env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:52540';
 
+// Modificar Aquí las URLs que serán aprobadas a funcionar
 const context =  [
-  "/weatherforecast",
+    "/weatherforecast",
+    "/albumes/lista",
+    "/albumes/nuevo"
 ];
 
 module.exports = function(app) {

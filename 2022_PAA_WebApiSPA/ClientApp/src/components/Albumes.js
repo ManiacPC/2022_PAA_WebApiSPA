@@ -4,6 +4,30 @@ import { albumesEjemplo } from '../assets/data/DataEjemplo' // Datos de ejemplo,
 const Albumes = () => {
     const [albumes, setAlbumes] = useState(albumesEjemplo) // estado donde se guardarán los álbumes desde el backend
 
+    // Función asíncrona para obtener los álbumes desde el backend
+    const cargarAlbumes = async () => {
+        const response = await fetch('/albumes/lista', {
+            method: "GET", // Método GET o POST
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await response.json() // La respuesta se convierte a objeto JSON
+        setAlbumes(data)
+    }
+
+    // UseEffect en formato useEffect(() => {}, []) es la función que se gatilla
+    // cuando la página termina de cargar (renderizar)
+    useEffect(() => {
+        // se debe crear una función llamada cargaInicial del tipo asíncrona
+        const cargaInicial = async () => {
+            await cargarAlbumes()
+        }
+
+        cargaInicial()
+    }, [])
+
+
     return (
         <>
             <div className="row">
@@ -21,12 +45,17 @@ const Albumes = () => {
                         </thead>
                         <tbody>
                             {/* Iteración entre albumes, renderizando filas de la tabla */}
-                            {albumes.map((album) => (
-                                <tr>
-                                    <td>{album.Titulo}</td>
-                                    <td>{album.Lanzamiento}</td>
-                                    <td>{album.TopSeller.toString()}</td>
-                                    <td>{album.Productora}</td>
+                            {albumes.map((album, indice) => (
+                                <tr key={indice}>
+                                    <td>{album.titulo}</td>
+                                    <td>{new Date(album.lanzamiento).toLocaleDateString()}</td>
+                                    <td>
+                                    {album.topSeller // condición
+                                        ? <span className="text-success">Si</span> // verdadero
+                                        : <span className="text-secondary">No</span> // falso
+                                    }
+                                    </td>
+                                    <td>{album.productora}</td>
                                 </tr>
                             ))}
                         </tbody>

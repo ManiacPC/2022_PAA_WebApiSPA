@@ -1,25 +1,25 @@
 ﻿export const albumesEjemplo = [
     {
-        Id          : 1,
-        Titulo      : "Álbum ejemplo",
-        Lanzamiento : "2022-01-09",
-        TopSeller   : false,
-        Productora  : "Blast! Musik!"
+        id          : 1,
+        iitulo      : "Álbum ejemplo",
+        lanzamiento : "2022-01-09",
+        topSeller   : false,
+        productora  : "Blast! Musik!"
     }
 ]
 
 export const cancionesEjemplo = [
     {
-        Id       : 101,
-        AlbumId  : 1,
-        Titulo   : "Canción de ejemplo",
-        Duracion : 4,
-        Album    : {
-            Id          : 1,
-            Titulo      : "Álbum ejemplo",
-            Lanzamiento : "2022-01-09",
-            TopSeller   : false,
-            Productora  : "Blast! Musik!"
+        id       : 101,
+        albumId  : 1,
+        titulo   : "Canción de ejemplo",
+        duracion : 4,
+        album    : {
+            id          : 1,
+            titulo      : "Álbum ejemplo",
+            lanzamiento : "2022-01-09",
+            topSeller   : false,
+            productora  : "Blast! Musik!"
         }
     }
 ]
